@@ -23,6 +23,6 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     path("", include("api_generator.urls")),
-    re_path(r'^totp/create/$', views.TOTPCreateView.as_view(), name='totp-create'),
+    path('totp/create/', views.TOTPCreateView.as_view(), name='totp-create'),
     re_path(r'^totp/login/(?P<token>[0-9]{6})/$', views.TOTPVerifyView.as_view(), name='totp-login'),
 ]

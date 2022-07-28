@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     'django_otp',
     'django_otp.plugins.otp_totp',
+    'qrcode'
+
 ]
 
 MIDDLEWARE = [
@@ -62,7 +64,7 @@ ROOT_URLCONF = 'django_auth.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -187,3 +189,8 @@ EMAIL_PORT = "2525"
 EMAIL_HOST_USER = "9a2b17a26a2741"
 EMAIL_HOST_PASSWORD = "0685bb58983545"
 EMAIL_USE_TLS = False
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'core.custom_authentication.AuthenticationWithoutPassword',
+)
